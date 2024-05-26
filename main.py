@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import StringVar, Frame
+from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW
 from tkinter import ttk
 
 from PIL import Image, ImageTk
@@ -39,6 +39,11 @@ frameBaixo.grid(row=2, column=0, pady=0, padx=1, sticky=tk.NSEW)
 
 # Abrindo imagem
 
+app_img = Image.open('inventario.png')
+app_img = app_img.resize((45,45))
+app_img = ImageTk.PhotoImage(app_img)
 
+app_logo = Label(frameCima, image=app_img, text=' Inventário Doméstico', width=900, compound=LEFT, relief=RAISED, anchor=NW, font=('Verdana 20 bold'), bg=co1, fg=co4)
+app_logo.place(x=0, y=0)
 
 janela.mainloop()
