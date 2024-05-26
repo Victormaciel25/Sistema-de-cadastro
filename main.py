@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW
+from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW, Entry
 from tkinter import ttk
 
 from PIL import Image, ImageTk
@@ -37,6 +37,10 @@ frameMeio.grid(row=1, column=0, pady=1, padx=0, sticky=tk.NSEW)
 frameBaixo = Frame(janela, width=1043, height=300, bg=co1, relief=tk.FLAT)
 frameBaixo.grid(row=2, column=0, pady=0, padx=1, sticky=tk.NSEW)
 
+# Trabalhando no frame cima
+
+
+
 # Abrindo imagem
 
 app_img = Image.open('inventario.png')
@@ -45,5 +49,14 @@ app_img = ImageTk.PhotoImage(app_img)
 
 app_logo = Label(frameCima, image=app_img, text=' Inventário Doméstico', width=900, compound=LEFT, relief=RAISED, anchor=NW, font=('Verdana 20 bold'), bg=co1, fg=co4)
 app_logo.place(x=0, y=0)
+
+# Trabalhando no frame meio
+
+# Criando entradas
+l_nome = Label(frameMeio, text='Nome', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_nome.place(x=10, y=10)
+
+e_nome = Entry(frameMeio, width=30, justify='left', relief='solid')
+e_nome.place(x=130, y=11)
 
 janela.mainloop()
