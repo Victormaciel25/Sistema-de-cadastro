@@ -2,7 +2,12 @@ import tkinter as tk
 from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW, Entry
 from tkinter import ttk
 
+# Importando Pillow
 from PIL import Image, ImageTk
+
+# Importando TKcalendar
+from tkcalendar import Calendar, DateEntry
+from datetime import date
 
 # Cores
 co0 = "#2e2d2b"  # preto
@@ -18,7 +23,7 @@ co9 = "#e9edf5"  # + verde
 
 # Criando janela
 janela = tk.Tk()
-janela.title('Exemplo de tkinter')
+janela.title('Tkinter')
 janela.geometry('900x600')
 janela.configure(background=co9)
 janela.resizable(width=False, height=False)
@@ -55,8 +60,37 @@ app_logo.place(x=0, y=0)
 # Criando entradas
 l_nome = Label(frameMeio, text='Nome', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 l_nome.place(x=10, y=10)
-
 e_nome = Entry(frameMeio, width=30, justify='left', relief='solid')
 e_nome.place(x=130, y=11)
+
+l_local = Label(frameMeio, text='Sala/Área', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_local.place(x=10, y=40)
+e_local = Entry(frameMeio, width=30, justify='left', relief='solid')
+e_local.place(x=130, y=41)
+
+l_descricao = Label(frameMeio, text='Descrição', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_descricao.place(x=10, y=70)
+e_descricao = Entry(frameMeio, width=30, justify='left', relief='solid')
+e_descricao.place(x=130, y=71)
+
+l_modelo = Label(frameMeio, text='Marca/Modelo', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_modelo.place(x=10, y=100)
+e_modelo = Entry(frameMeio, width=30, justify='left', relief='solid')
+e_modelo.place(x=130, y=101)
+
+l_cal = Label(frameMeio, text='Data da compra', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_cal.place(x=10, y=130)
+e_cal = DateEntry(frameMeio, width=12,background='black', bordewidth=2, year=2024)
+e_cal.place(x=130, y=131)
+
+l_valor = Label(frameMeio, text='Valor da compra', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_valor.place(x=10, y=160)
+e_valor = Entry(frameMeio, width=30, justify='left', relief='solid')
+e_valor.place(x=130, y=161)
+
+l_serial = Label(frameMeio, text='Número de serie', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_serial.place(x=10, y=190)
+e_serial = Entry(frameMeio, width=30, justify='left', relief='solid')
+e_serial.place(x=130, y=191)
 
 janela.mainloop()
