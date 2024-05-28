@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW, Entry
+from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW, Entry, Button
 from tkinter import ttk
 
 # Importando Pillow
@@ -88,9 +88,16 @@ l_valor.place(x=10, y=160)
 e_valor = Entry(frameMeio, width=30, justify='left', relief='solid')
 e_valor.place(x=130, y=161)
 
-l_serial = Label(frameMeio, text='Número de serie', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_serial = Label(frameMeio, text='Número de série', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 l_serial.place(x=10, y=190)
 e_serial = Entry(frameMeio, width=30, justify='left', relief='solid')
 e_serial.place(x=130, y=191)
+
+# Criando botões
+l_carregar = Label(frameMeio, text='Imagem do item', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_carregar.place(x=10, y=220)
+b_carregar = Button(frameMeio, width=30, text='carregar'.upper(), height=1,compound='center', anchor='center',overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_carregar.place(x=130, y=220)
+
 
 janela.mainloop()
