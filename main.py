@@ -93,11 +93,50 @@ l_serial.place(x=10, y=190)
 e_serial = Entry(frameMeio, width=30, justify='left', relief='solid')
 e_serial.place(x=130, y=191)
 
-# Criando botões
+# Criando botões ---------------------------
+
+# Botão carregar
 l_carregar = Label(frameMeio, text='Imagem do item', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 l_carregar.place(x=10, y=220)
-b_carregar = Button(frameMeio, width=30, text='carregar'.upper(), height=1,compound='center', anchor='center',overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_carregar = Button(frameMeio, width=29, text='carregar'.upper(), height=1,compound='center', anchor='center',overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
 b_carregar.place(x=130, y=220)
+
+# Botão inserir
+img_add = Image.open('add.png')
+img_add = img_add.resize((20,20))
+img_add = ImageTk.PhotoImage(img_add)
+
+b_inserir = Button(frameMeio, image=img_add, width=95, text='  Adicionar'.upper(), compound='left', anchor=NW, overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_inserir.place(x=330, y=10)
+
+# Botão atualizar
+img_update = Image.open('update.png')
+img_update = img_update.resize((20,20))
+img_update = ImageTk.PhotoImage(img_update)
+
+b_update = Button(frameMeio, image=img_update, width=95, text='  Atualizar'.upper(), compound='left', anchor=NW, overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_update.place(x=330, y=50)
+
+# Botão deletar
+img_delete = Image.open('delete.png')
+img_delete = img_delete.resize((20,20))
+img_delete = ImageTk.PhotoImage(img_delete)
+
+b_delete = Button(frameMeio, image=img_delete, width=95, text='  Deletar'.upper(), compound='left', anchor=NW, overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_delete.place(x=330, y=90)
+
+# Botão ver imagem
+img_item = Image.open('item.png')
+img_item = img_item.resize((20,20))
+img_item = ImageTk.PhotoImage(img_item)
+
+b_item = Button(frameMeio, image=img_item, width=95, text='  Ver item'.upper(), compound='left', anchor=NW, overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_item.place(x=330, y=221)
+
+# Labels quantidade total e valores
+
+l_total = Label(frameMeio, text='Descrição', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+l_total.place(x=10, y=70)
 
 
 janela.mainloop()
