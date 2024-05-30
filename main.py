@@ -81,9 +81,6 @@ def inserir():
     e_valor.delete(0,'end')
     e_serial.delete(0,'end')
 
-    for widget in frameMeio.winfo_children():
-        widget.destroy()
-    
     mostrar()
 
 # Função para escolher imagem
@@ -216,7 +213,7 @@ def mostrar():
     # creating a treeview with dual scrollbars
     tabela_head = ['#Item','Nome',  'Sala/Área','Descrição', 'Marca/Modelo', 'Data da compra','Valor da compra', 'Número de série']
 
-    lista_itens = []
+    lista_itens = ver_form()
 
 
     tree = ttk.Treeview(frameBaixo, selectmode="extended",columns=tabela_head, show="headings")

@@ -40,7 +40,7 @@ def ver_form():
     return ver_dados
 
 
-# Ver dados
+# Ver dados individual
 def ver_item(id):
     ver_dados_individual = []
     with con:
