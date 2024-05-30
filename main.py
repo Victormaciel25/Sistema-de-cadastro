@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import StringVar, Frame, Label, LEFT, RAISED, NW, Entry, Button, CENTER
 from tkinter import ttk
+from tkinter import messagebox
+from tkinter import filedialog as fd
 
 # Importando Pillow
 from PIL import Image, ImageTk
@@ -8,6 +10,9 @@ from PIL import Image, ImageTk
 # Importando TKcalendar
 from tkcalendar import Calendar, DateEntry
 from datetime import date
+
+# Importando view
+from view import *
 
 # Cores
 co0 = "#2e2d2b"  # preto
@@ -42,9 +47,65 @@ frameMeio.grid(row=1, column=0, pady=1, padx=0, sticky=tk.NSEW)
 frameBaixo = Frame(janela, width=1043, height=300, bg=co1, relief=tk.FLAT)
 frameBaixo.grid(row=2, column=0, pady=0, padx=1, sticky=tk.NSEW)
 
+# Criando funções
+global tree
+
+# Função inserir
+def inserir():
+    global imagem, imagem_string,l_imagem
+
+    nome = e_nome.get()
+    local = e_local.get()
+    descricao = e_descricao.get()
+    modelo = e_modelo.get()
+    data = e_cal.get()
+    valor = e_valor.get()
+    serie = e_serial.get()
+    imagem = imagem_string
+
+    lista_inserir = [nome, local, descricao, modelo, data, valor, serie, imagem]
+
+    for i in lista_inserir:
+        if i=='':
+            messagebox.showerror('Erro', 'Preencha todos os campos')
+            return
+    inserir_form(lista_inserir)
+
+    messagebox.showinfo('Sucesso', 'OS dados foram inseridos com sucesso.')
+
+    nome.delete(0,'end')
+    local.delete(0,'end')
+    descricao.delete(0,'end')
+    modelo.delete(0,'end')
+    data.delete(0,'end')
+    valor.delete(0,'end')
+    serie.delete(0,'end')
+
+    for widget in frameMeio.winfo_children():
+        widget.destroy()
+    
+    mostrar()
+
+# Função para escolher imagem
+global imagem, imagem_string,l_imagem
+
+def escolher_imagem():
+    global imagem, imagem_string,l_imagem
+
+    imagem = fd.askopenfilename()
+    imagem_string = imagem
+    
+    # Abrindo imagem
+
+    imagem = Image.open(imagem)
+    imagem = app_img.resize((170,170))
+    imagem = ImageTk.PhotoImage(app_img)
+
+    l_imagem = Label(frameCima, image=imagem, bg=co1, fg=co4)
+    l_imagem.place(x=700, y=10)
+
+
 # Trabalhando no frame cima
-
-
 
 # Abrindo imagem
 
@@ -98,7 +159,7 @@ e_serial.place(x=130, y=191)
 # Botão carregar
 l_carregar = Label(frameMeio, text='Imagem do item', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 l_carregar.place(x=10, y=220)
-b_carregar = Button(frameMeio, width=29, text='carregar'.upper(), height=1,compound='center', anchor='center',overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_carregar = Button(frameMeio,command=escolher_imagem, width=29, text='carregar'.upper(), height=1,compound='center', anchor='center',overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
 b_carregar.place(x=130, y=220)
 
 # Botão inserir
@@ -106,7 +167,7 @@ img_add = Image.open('add.png')
 img_add = img_add.resize((20,20))
 img_add = ImageTk.PhotoImage(img_add)
 
-b_inserir = Button(frameMeio, image=img_add, width=95, text='  Adicionar'.upper(), compound='left', anchor=NW, overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
+b_inserir = Button(frameMeio,command=inserir, image=img_add, width=95, text='  Adicionar'.upper(), compound='left', anchor=NW, overrelief='ridge', font=('Ivy 8'), bg=co1, fg=co0)
 b_inserir.place(x=330, y=10)
 
 # Botão atualizar
@@ -150,54 +211,56 @@ l_qtd_ = Label(frameMeio, text='    Quantidade total de itens', height=1, anchor
 l_qtd_.place(x=450, y=92)
 
 # Tabela
+def mostrar():
+
+    # creating a treeview with dual scrollbars
+    tabela_head = ['#Item','Nome',  'Sala/Área','Descrição', 'Marca/Modelo', 'Data da compra','Valor da compra', 'Número de série']
+
+    lista_itens = []
 
 
-# creating a treeview with dual scrollbars
-tabela_head = ['#Item','Nome',  'Sala/Área','Descrição', 'Marca/Modelo', 'Data da compra','Valor da compra', 'Número de série']
+    tree = ttk.Treeview(frameBaixo, selectmode="extended",columns=tabela_head, show="headings")
 
-lista_itens = []
+    # vertical scrollbar
+    vsb = ttk.Scrollbar(frameBaixo, orient="vertical", command=tree.yview)
 
-global tree
+    # horizontal scrollbar
+    hsb = ttk.Scrollbar(frameBaixo, orient="horizontal", command=tree.xview)
 
-tree = ttk.Treeview(frameBaixo, selectmode="extended",columns=tabela_head, show="headings")
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+    tree.grid(column=0, row=0, sticky='nsew')
+    vsb.grid(column=1, row=0, sticky='ns')
+    hsb.grid(column=0, row=1, sticky='ew')
+    frameBaixo.grid_rowconfigure(0, weight=12)
 
-# vertical scrollbar
-vsb = ttk.Scrollbar(frameBaixo, orient="vertical", command=tree.yview)
+    hd=["center","center","center","center","center","center","center", 'center']
+    h=[40,150,100,160,130,100,100, 100]
+    n=0
 
-# horizontal scrollbar
-hsb = ttk.Scrollbar(frameBaixo, orient="horizontal", command=tree.xview)
-
-tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-tree.grid(column=0, row=0, sticky='nsew')
-vsb.grid(column=1, row=0, sticky='ns')
-hsb.grid(column=0, row=1, sticky='ew')
-frameBaixo.grid_rowconfigure(0, weight=12)
-
-hd=["center","center","center","center","center","center","center", 'center']
-h=[40,150,100,160,130,100,100, 100]
-n=0
-
-for col in tabela_head:
-    tree.heading(col, text=col.title(), anchor=CENTER)
-    # adjust the column's width to the header string
-    tree.column(col, width=h[n],anchor=hd[n])
-    n+=1
+    for col in tabela_head:
+        tree.heading(col, text=col.title(), anchor=CENTER)
+        # adjust the column's width to the header string
+        tree.column(col, width=h[n],anchor=hd[n])
+        n+=1
 
 
-# inserindo os itens dentro da tabela
-for item in lista_itens:
-    tree.insert('', 'end', values=item)
+    # inserindo os itens dentro da tabela
+    for item in lista_itens:
+        tree.insert('', 'end', values=item)
 
 
-quantidade = [8888,88]
+    quantidade = [8888,88]
 
-for iten in lista_itens:
-    quantidade.append(iten[6])
+    for iten in lista_itens:
+        quantidade.append(iten[6])
 
-Total_valor = sum(quantidade)
-Total_itens = len(quantidade)
+    Total_valor = sum(quantidade)
+    Total_itens = len(quantidade)
 
-l_total['text'] = 'R$ {:,.2f}'.format(Total_valor)
-l_qtd['text'] = Total_itens
+    l_total['text'] = 'R$ {:,.2f}'.format(Total_valor)
+    l_qtd['text'] = Total_itens
+
+    
+mostrar()
 
 janela.mainloop()
