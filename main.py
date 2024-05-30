@@ -73,13 +73,13 @@ def inserir():
 
     messagebox.showinfo('Sucesso', 'OS dados foram inseridos com sucesso.')
 
-    nome.delete(0,'end')
-    local.delete(0,'end')
-    descricao.delete(0,'end')
-    modelo.delete(0,'end')
-    data.delete(0,'end')
-    valor.delete(0,'end')
-    serie.delete(0,'end')
+    e_nome.delete(0,'end')
+    e_local.delete(0,'end')
+    e_descricao.delete(0,'end')
+    e_modelo.delete(0,'end')
+    e_cal.delete(0,'end')
+    e_valor.delete(0,'end')
+    e_serial.delete(0,'end')
 
     for widget in frameMeio.winfo_children():
         widget.destroy()
@@ -98,10 +98,10 @@ def escolher_imagem():
     # Abrindo imagem
 
     imagem = Image.open(imagem)
-    imagem = app_img.resize((170,170))
-    imagem = ImageTk.PhotoImage(app_img)
+    imagem = imagem.resize((170,170))
+    imagem = ImageTk.PhotoImage(imagem)
 
-    l_imagem = Label(frameCima, image=imagem, bg=co1, fg=co4)
+    l_imagem = Label(frameMeio, image=imagem, bg=co1, fg=co4)
     l_imagem.place(x=700, y=10)
 
 
